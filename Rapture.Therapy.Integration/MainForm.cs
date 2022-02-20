@@ -1,9 +1,15 @@
+using Rapture.Therapy.Integration.Configuration;
+
 namespace Rapture.Therapy.Integration
 {
     public partial class MainForm : Form
     {
-        public MainForm()
+        private RaptureTherapyIntegrationSettings AppSettings { get; }
+
+        public MainForm(RaptureTherapyIntegrationSettings appSettings)
         {
+            AppSettings = appSettings;
+
             InitializeComponent();
         }
 

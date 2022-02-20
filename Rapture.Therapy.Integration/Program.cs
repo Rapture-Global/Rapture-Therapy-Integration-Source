@@ -1,3 +1,6 @@
+using Microsoft.Extensions.Configuration;
+using Rapture.Therapy.Integration.Configuration;
+
 namespace Rapture.Therapy.Integration
 {
     internal static class Program
@@ -8,10 +11,17 @@ namespace Rapture.Therapy.Integration
         [STAThread]
         static void Main()
         {
-            // To customize application configuration such as set high DPI settings or default font,
+            IConfiguration config = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json")
+                .Build();
+
+            // Get values from the config given their key and their target type.
+            RaptureTherapyIntegrationSettings appSettings = config.GetSection(RaptureTherapyIntegrationSettings.SectionName).Get<RaptureTherapyIntegrationSettings>();
+
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new MainForm());
+            Application.Run(new MainForm(appSettings));
         }
     }
 }
