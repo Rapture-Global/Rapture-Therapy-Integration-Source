@@ -31,7 +31,9 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.TabPageAuthentication = new System.Windows.Forms.TabPage();
             this.ButtonExit = new System.Windows.Forms.Button();
+            this.ButtonDevelopment = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
+            this.TabPageAuthentication.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -48,6 +50,7 @@
             // 
             // TabPageAuthentication
             // 
+            this.TabPageAuthentication.Controls.Add(this.ButtonDevelopment);
             this.TabPageAuthentication.Location = new System.Drawing.Point(4, 24);
             this.TabPageAuthentication.Name = "TabPageAuthentication";
             this.TabPageAuthentication.Padding = new System.Windows.Forms.Padding(3);
@@ -67,6 +70,17 @@
             this.ButtonExit.UseVisualStyleBackColor = true;
             this.ButtonExit.Click += new System.EventHandler(this.ButtonExit_Click);
             // 
+            // ButtonDevelopment
+            // 
+            this.ButtonDevelopment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.ButtonDevelopment.Location = new System.Drawing.Point(772, 375);
+            this.ButtonDevelopment.Name = "ButtonDevelopment";
+            this.ButtonDevelopment.Size = new System.Drawing.Size(124, 23);
+            this.ButtonDevelopment.TabIndex = 2;
+            this.ButtonDevelopment.Text = "&Development";
+            this.ButtonDevelopment.UseVisualStyleBackColor = true;
+            this.ButtonDevelopment.Click += new System.EventHandler(this.ButtonDevelopment_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -77,6 +91,7 @@
             this.Name = "MainForm";
             this.Text = "Rapture Therapy Integration Application";
             this.tabControl1.ResumeLayout(false);
+            this.TabPageAuthentication.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -86,5 +101,6 @@
         private TabControl tabControl1;
         private TabPage TabPageAuthentication;
         private Button ButtonExit;
+        private Button ButtonDevelopment;
     }
 }

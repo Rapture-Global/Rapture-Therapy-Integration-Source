@@ -6,7 +6,7 @@
 
         public class ApiSettings
         {
-            public string ApiBaseUrl { get; set; }
+            public string BaseUrl { get; set; }
         }
 
         public ApiSettings Api { get; set; }

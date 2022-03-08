@@ -1,4 +1,5 @@
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Rapture.Therapy.Integration.Configuration;
 
 namespace Rapture.Therapy.Integration
@@ -19,9 +20,17 @@ namespace Rapture.Therapy.Integration
             // Get values from the config given their key and their target type.
             RaptureTherapyIntegrationSettings appSettings = config.GetSection(RaptureTherapyIntegrationSettings.SectionName).Get<RaptureTherapyIntegrationSettings>();
 
-            // see https://aka.ms/applicationconfiguration.
+            using var loggerFactory = LoggerFactory.Create(builder =>
+            {
+                builder
+                    .AddFilter("Microsoft", LogLevel.Warning)
+                    .AddFilter("System", LogLevel.Warning)
+                    .AddFilter("LoggingConsoleApp.Program", LogLevel.Debug)
+                    .AddConsole();
+            });
+
             ApplicationConfiguration.Initialize();
-            Application.Run(new MainForm(appSettings));
+            Application.Run(new MainForm(loggerFactory, appSettings));
         }
     }
 }
