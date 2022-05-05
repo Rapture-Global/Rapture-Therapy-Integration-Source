@@ -38,20 +38,33 @@ namespace Rapture.Therapy.Integration
                 var requestDto = new UserSessionSignInRequestDto()
                 {
                     EMailAddress = "Eamonn@Duffy.global",
-                    PlainTextPassword = "Eamonn123456"
+                    PlainTextPassword = ""  // TODO: Do NOT Commit This Password.
                 };
 
-                var signInResponse = await apiClient.PostAsync<UserSessionSignInRequestDto, UserSessionSignInResponseDto>("/Users/Sessions", requestDto, null);
+                var signInResponseDto = await apiClient.PostAsync<UserSessionSignInRequestDto, UserSessionSignInResponseDto>("/Users/Sessions", requestDto, null);
 
-                if ((signInResponse.HttpStatusCode == StatusCodes.Status201Created) &&
-                    (signInResponse.ResponseDto.DeveloperCode == (long)CommonDeveloperCode.Success))
+                if ((signInResponseDto.HttpStatusCode == StatusCodes.Status201Created) &&
+                    (signInResponseDto.ResponseDto.DeveloperCode == (long)CommonDeveloperCode.Success))
                 {
                     var optionalHeaders = new ApiHeaders
                     {
-                        { EadentHeaders.SessionTokenName, signInResponse.ResponseDto.SessionToken }
+                        { EadentHeaders.SessionTokenName, signInResponseDto.ResponseDto.SessionToken }
                     };
 
-                    var signOutResponse = await apiClient.DeleteAsync<UserSessionSignOutResponseDto>("/Users/Sessions", optionalHeaders);
+                    var userRegisterRequestDto = new UserRegisterRequestDto
+                    {
+                        CreatedByApplicationId = -1,
+                        UserGuidString = null,
+                        RoleId = 1000,
+                        DisplayName = "",
+                        EMailAddress = "",
+                        MobilePhoneNumber = ",
+                        PlainTextPassword = ""
+                    };
+
+                    var userRegisterResponseDto = await apiClient.PostAsync<UserRegisterRequestDto, UserRegisterResponseDto>("/Users", userRegisterRequestDto, optionalHeaders);
+
+                    var signOutResponseDto = await apiClient.DeleteAsync<UserSessionSignOutResponseDto>("/Users/Sessions", optionalHeaders);
                 }
             }
         }
